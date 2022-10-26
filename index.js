@@ -10,9 +10,23 @@ app.get("/", (req, res) => {
 app.listen(port, () => {
 	console.log("Port is running now: ", port);
 });
-
+const products = require("./data/products.json");
 const categories = require("./data/Categories");
-
 app.get("/course_categories", (req, res) => {
-	res.send(categories);
+	if (categories.id === "7") {
+		res.send(products);
+	} else {
+		res.send(categories);
+	}
+});
+
+app.get("/course", (req, res) => {
+	res.send(products);
+});
+
+app.get("/course/:id", (req, res) => {
+	const id = req.params.id;
+	console.log(id);
+	const selectCourse = products.find(c => c.id == id);
+	res.send(selectCourse);
 });
