@@ -13,20 +13,21 @@ app.listen(port, () => {
 const products = require("./data/products.json");
 const categories = require("./data/Categories");
 app.get("/course_categories", (req, res) => {
-	if (categories.id === "7") {
-		res.send(products);
-	} else {
-		res.send(categories);
-	}
+	res.send(categories);
 });
 
 app.get("/course", (req, res) => {
 	res.send(products);
 });
-
 app.get("/course/:id", (req, res) => {
 	const id = req.params.id;
-	console.log(id);
+	const selectCourse = products.find(c => c.id === id);
+	res.send(selectCourse);
+});
+
+app.get("/category/:id", (req, res) => {
+	const id = req.params.id;
+
 	const selectCourse = products.find(c => c.id == id);
 	res.send(selectCourse);
 });
