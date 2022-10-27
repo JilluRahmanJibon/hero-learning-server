@@ -10,7 +10,7 @@ app.get("/", (req, res) => {
 app.listen(port, () => {
 	console.log("Port is running now: ", port);
 });
-const products = require("./data/products.json");
+const products = require("./data/products");
 const categories = require("./data/Categories");
 app.get("/course_categories", (req, res) => {
 	res.send(categories);
@@ -27,7 +27,6 @@ app.get("/course/:id", (req, res) => {
 
 app.get("/category/:id", (req, res) => {
 	const id = req.params.id;
-
 	const selectCourse = products.find(c => c.id == id);
 	res.send(selectCourse);
 });
